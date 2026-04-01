@@ -1,0 +1,11 @@
+{
+  "rules": {
+    ".read": true,
+    "presence": {
+      "$sessionId": {
+        ".write": true,
+        ".validate": "newData.hasChildren(['label', 'updatedAt', 'cursorVisible'])"
+      }
+    }
+  }
+}

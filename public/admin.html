@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Debug Dashboard</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles/site.css" />
+    <script type="module" src="./scripts/admin.mjs"></script>
+  </head>
+  <body class="page-admin">
+    <div class="background-glow background-glow-left" aria-hidden="true"></div>
+    <div class="background-glow background-glow-right" aria-hidden="true"></div>
+
+    <main class="admin-shell">
+      <header class="admin-header reveal is-visible">
+        <div>
+          <p class="section-kicker">Debug</p>
+          <h1 class="section-title">Portfolio stats dashboard</h1>
+          <p class="section-description">
+            Lightweight visibility into visits, live presence, and traffic attribution.
+          </p>
+        </div>
+        <a class="button button-secondary" href="./index.html">Back to portfolio</a>
+      </header>
+
+      <section class="admin-grid reveal is-visible">
+        <article class="metric-card">
+          <p class="metric-card__label">Total visits</p>
+          <p class="metric-card__value" data-stat-total>0</p>
+        </article>
+        <article class="metric-card">
+          <p class="metric-card__label">Unique sessions</p>
+          <p class="metric-card__value" data-stat-sessions>0</p>
+        </article>
+        <article class="metric-card">
+          <p class="metric-card__label">Live visitors now</p>
+          <p class="metric-card__value" data-stat-live>0</p>
+        </article>
+        <article class="metric-card metric-card--status">
+          <p class="metric-card__label">Firebase status</p>
+          <p class="metric-card__note" data-firebase-status>Waiting for Firebase configuration.</p>
+        </article>
+      </section>
+
+      <section class="admin-panels reveal is-visible">
+        <article class="admin-panel">
+          <div class="admin-panel__header">
+            <h2 class="admin-panel__title">Visits by source</h2>
+          </div>
+          <div class="source-list" data-source-list></div>
+        </article>
+
+        <article class="admin-panel">
+          <div class="admin-panel__header">
+            <h2 class="admin-panel__title">Live explorers</h2>
+          </div>
+          <div class="live-list" data-live-list></div>
+        </article>
+      </section>
+
+      <section class="admin-panel reveal is-visible">
+        <div class="admin-panel__header">
+          <h2 class="admin-panel__title">Latest visit records</h2>
+        </div>
+        <div class="table-shell">
+          <table class="visits-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Source</th>
+                <th>UTM</th>
+                <th>Landing page</th>
+              </tr>
+            </thead>
+            <tbody data-visits-table></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project | Portfolio</title>
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles/site.css" />
+    <script type="module" src="./scripts/project.mjs"></script>
+  </head>
+  <body class="page-project">
+    <div class="background-glow background-glow-left" aria-hidden="true"></div>
+    <div class="background-glow background-glow-right" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-brand" href="./index.html" data-project-brand>Portfolio</a>
+        <a class="button button-secondary button-compact" href="./index.html#projects">Back to portfolio</a>
+      </div>
+    </header>
+
+    <main class="project-shell">
+      <section class="project-layout">
+        <article class="project-hero-card">
+          <div class="project-hero-card__top">
+            <div class="project-hero-card__identity">
+              <div class="project-card__icon" data-project-icon data-tone="stone"></div>
+              <div>
+                <p class="project-eyebrow" data-project-eyebrow></p>
+                <h1 class="project-name" data-project-name></h1>
+                <p class="project-subtitle" data-project-subtitle></p>
+              </div>
+            </div>
+            <div class="action-row" data-project-actions></div>
+          </div>
+
+          <div class="project-hero-card__body">
+            <p class="project-summary" data-project-summary></p>
+            <div class="tag-list" data-project-tags></div>
+          </div>
+        </article>
+
+        <section class="project-meta-grid">
+          <article class="project-section-card">
+            <h2 class="project-section-card__title">Overview</h2>
+            <div class="project-copy" data-project-overview></div>
+          </article>
+
+          <article class="project-section-card">
+            <h2 class="project-section-card__title">Highlights</h2>
+            <ul class="project-highlight-list" data-project-highlights></ul>
+          </article>
+        </section>
+
+        <article class="project-section-card">
+          <h2 class="project-section-card__title" data-project-gallery-title>Screenshots</h2>
+          <p class="project-gallery-copy" data-project-gallery-copy></p>
+          <div class="project-gallery" data-project-gallery></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p class="site-footer__copy" data-project-footer></p>
+      <p class="site-footer__meta">Same button system, separate project pages, and optional screenshot galleries.</p>
+    </footer>
+  </body>
+</html>
