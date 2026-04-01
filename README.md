@@ -1,14 +1,34 @@
-# Premium Portfolio Website
+# Elbek Mirzamakhmudov Portfolio
 
-Minimal static portfolio for a Flutter and iOS developer, with Firebase-backed visit tracking, source attribution, and live anonymous cursors.
+Personal portfolio website for Elbek Mirzamakhmudov, a Flutter and iOS developer.
 
-## What’s included
+This repo contains a static portfolio focused on:
 
-- Premium responsive portfolio UI with editable content in one file
-- Live cursor presence with anonymous labels and a subtle built-in reviewer bot
-- Session-based visit tracking with source attribution
-- Separate debug dashboard at `/admin.html`
-- Firebase Hosting, Netlify, and Vercel-friendly structure
+- polished mobile product presentation
+- real published apps and client work
+- separate project detail pages for archived or unpublished work
+- Firebase-backed live visitors, source attribution, and lightweight stats
+
+## Stack
+
+- HTML
+- CSS
+- Vanilla JavaScript with ES modules
+- Firebase Firestore
+- Firebase Realtime Database
+- Firebase Analytics optional
+
+The project stays intentionally simple so it is easy to deploy, edit, and maintain.
+
+## Main features
+
+- Editorial landing page with hero, selected work, experience, education, skills, and contact
+- Project cards generated from a single content file
+- Dedicated project pages at `project.html?slug=...`
+- Support for older/private work through screenshot-ready detail pages
+- Firebase visit tracking with `src` and UTM attribution
+- Live anonymous cursor presence with a subtle built-in reviewer bot
+- Debug dashboard at `/admin.html`
 
 ## Project structure
 
@@ -23,6 +43,7 @@ Minimal static portfolio for a Flutter and iOS developer, with Firebase-backed v
 └── public
     ├── admin.html
     ├── index.html
+    ├── project.html
     ├── assets
     │   └── favicon.svg
     ├── styles
@@ -35,82 +56,115 @@ Minimal static portfolio for a Flutter and iOS developer, with Firebase-backed v
         ├── firebase-config.mjs
         ├── firebase-service.mjs
         ├── live-cursors.mjs
+        ├── project.mjs
+        ├── reviewer-bot.mjs
         ├── source-tracking.mjs
         └── utils.mjs
 ```
 
-## Setup
+## Where to edit content
 
-1. Edit the portfolio content in `public/scripts/content.mjs`.
-2. Replace the placeholder values in `public/scripts/firebase-config.mjs`.
-3. Set `enabled: true` in `public/scripts/firebase-config.mjs`.
-4. Create these Firebase services in your project:
-   - Analytics
-   - Firestore
-   - Realtime Database
-   - Hosting if you want Firebase-native deployment
-5. Deploy the provided Firebase rules before using the live features:
+Most portfolio content lives in:
+
+- `public/scripts/content.mjs`
+
+This file controls:
+
+- hero text
+- projects
+- project detail pages
+- experience
+- education
+- skills
+- contact links
+- footer copy
+
+## Updating projects
+
+Each project entry in `public/scripts/content.mjs` supports:
+
+- `slug`
+- `name`
+- `subtitle`
+- `description`
+- `tags`
+- `icon` or `iconImage`
+- `links`
+- optional `detail`
+
+Use `detail` for:
+
+- longer project overview
+- highlights list
+- screenshots gallery
+- archived project placeholder states
+
+Example use cases:
+
+- published App Store apps can keep `App Store` and `Website` links
+- old or unpublished work can use `View project` and show screenshots on `project.html`
+
+## Firebase setup
+
+Update:
+
+- `public/scripts/firebase-config.mjs`
+
+Reference:
+
+- `public/scripts/firebase-config.example.mjs`
+
+The site stays in preview mode until:
+
+1. `enabled` is set to `true`
+2. real Firebase web config values are added
+
+Required Firebase services:
+
+- Firestore
+- Realtime Database
+- Analytics optional
+
+Deploy rules:
 
 ```bash
 firebase deploy --only firestore:rules,database
 ```
 
-6. Preview locally from the repo root:
+## Tracking behavior
 
-```bash
-python3 -m http.server 4173 --directory public
-```
+Visit tracking is session-based, so refreshes in the same session do not inflate counts.
 
-Then open `http://localhost:4173`.
+Supported incoming source patterns:
 
-## Firebase config
+- `?src=linkedin`
+- `?src=github`
+- `?src=instagram`
+- `?src=x`
+- `?src=telegram`
+- `?src=direct`
 
-Update this file:
+UTM support:
 
-- `public/scripts/firebase-config.mjs`
+- `utm_source`
+- `utm_medium`
+- `utm_campaign`
 
-Reference template:
+Source precedence:
 
-- `public/scripts/firebase-config.example.mjs`
+1. `src`
+2. `utm_source`
+3. referrer match
+4. `direct`
 
-The app stays in preview mode until Firebase is enabled. In preview mode:
-
-- the portfolio UI still works
-- admin data shows empty states
-- live cursors stay disabled
-
-## Source tracking behavior
-
-Visit attribution is session-based, not raw page-refresh based.
-
-- Session length defaults to 30 minutes and is configurable in `firebase-config.mjs`
-- The first page load for a session creates one visit record
-- Refreshes within the same session reuse the same visit record
-- Source precedence is:
-  - `?src=...`
-  - `utm_source`
-  - referrer match
-  - `direct`
-- Supported direct source labels:
-  - `linkedin`
-  - `github`
-  - `instagram`
-  - `x`
-  - `telegram`
-  - `direct`
-- `utm_medium` and `utm_campaign` are stored on the visit record when present
-
-Visit counters are lightweight and client-side. This is appropriate for a portfolio and testing, but not hardened against malicious traffic. If you need tamper-resistant analytics, move counting logic to a trusted backend or Cloud Functions.
-
-## Live cursor behavior
+## Live presence
 
 - Presence uses Firebase Realtime Database
-- Each visitor gets a stored anonymous label like `swift-fox`
-- Cursor rendering is desktop-first and hidden on coarse pointers / smaller screens
-- A subtle `bot-reviewer` cursor is always present so the portfolio never feels empty in demos
-- Presence is removed on disconnect and filtered client-side if stale
+- Visitors get anonymous labels
+- Live cursors render on desktop and stay hidden on touch/coarse pointer devices
+- A reviewer bot is always present for demo feel
 
-## Debug dashboard
+## Admin page
 
 Open:
 
@@ -121,52 +175,43 @@ It shows:
 - total visits
 - unique sessions
 - live visitors now
-- visits by source
+- source breakdown
 - latest visit records
 
-This page is intentionally simple and is not access-controlled.
+## Run locally
 
-## Deployment
+From the repo root:
+
+```bash
+python3 -m http.server 4173 --directory public
+```
+
+Then open:
+
+- `http://localhost:4173/`
+- `http://localhost:4173/admin.html`
+
+## Deploy
 
 ### Firebase Hosting
-
-From the project root:
 
 ```bash
 firebase deploy
 ```
 
-The provided `firebase.json` already points Hosting to `public/`.
+### Netlify
+
+- publish directory: `public`
+- no build command
 
 ### Vercel
 
-- Import the repo
-- Use no build command
-- Keep the default static output behavior
-- Put your real Firebase config in `public/scripts/firebase-config.mjs`
-
-Vercel serves files in `public/` directly.
-
-### Netlify
-
-- Import the repo
-- Publish directory: `public`
-- No build command needed
-
-`netlify.toml` is already included.
-
-## What to replace with real information
-
-- `siteContent.brand`
-- `siteContent.hero.*`
-- project cards in `siteContent.projects`
-- experience entries in `siteContent.experience`
-- skills in `siteContent.skillGroups`
-- links and email in `siteContent.contact`
-- Firebase credentials in `public/scripts/firebase-config.mjs`
+- import the repo
+- no build command
+- static output from `public/`
 
 ## Notes
 
-- The site uses plain HTML, CSS, and ES modules to keep deployment and maintenance straightforward.
-- Firebase Analytics is optional but supported automatically when a `measurementId` is present.
-- The admin page does not create extra visit records by itself.
+- This portfolio uses plain web technologies on purpose for easy deployment and long-term editing.
+- Project detail pages make it possible to show archived/private work without cluttering the homepage.
+- If a project has no public screenshots yet, the detail page can stay as a clean placeholder until assets are added.
