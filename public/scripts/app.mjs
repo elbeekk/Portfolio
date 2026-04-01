@@ -42,6 +42,8 @@ function renderSite() {
     .join("");
 
   qs("[data-hero-kicker]").textContent = siteContent.hero.kicker;
+  qs("[data-hero-availability]").textContent =
+    siteContent.hero.availability || "Available for select freelance and contract work";
   const heroName = qs("[data-hero-name]");
   if (siteContent.hero.nameLines?.length) {
     heroName.innerHTML = siteContent.hero.nameLines
@@ -53,6 +55,11 @@ function renderSite() {
   qs("[data-hero-title]").textContent = siteContent.hero.title;
   qs("[data-hero-description]").textContent = siteContent.hero.description;
   qs("[data-hero-note]").textContent = siteContent.hero.note;
+
+  const heroPills = qs("[data-hero-pills]");
+  heroPills.innerHTML = (siteContent.hero.pills || [])
+    .map((pill) => `<span class="hero-pill">${pill}</span>`)
+    .join("");
 
   const primaryButton = qs("[data-hero-primary]");
   primaryButton.textContent = siteContent.hero.primaryCta.label;
@@ -66,7 +73,32 @@ function renderSite() {
   factList.innerHTML = siteContent.hero.facts
     .map(
       (fact) =>
-        `<li><span class="hero-facts__label">${fact.label}</span><span class="hero-facts__value">${fact.value}</span></li>`
+        `<article class="hero-fact-card">
+          <span class="hero-facts__label">${fact.label}</span>
+          <span class="hero-facts__value">${fact.value}</span>
+        </article>`
+    )
+    .join("");
+
+  const featuredProjects = getHeroFeaturedProjects();
+  const heroFeatured = qs("[data-hero-featured]");
+  heroFeatured.innerHTML = featuredProjects
+    .map(
+      (project) => `
+        <article class="hero-featured__item">
+          <div class="project-card__icon hero-featured__icon" data-tone="${project.tone}">
+            ${
+              project.iconImage
+                ? `<img src="${project.iconImage}" alt="${project.name} icon" loading="lazy" />`
+                : project.icon
+            }
+          </div>
+          <div class="hero-featured__copy">
+            <h3 class="hero-featured__title">${project.name}</h3>
+            <p class="hero-featured__subtitle">${project.subtitle}</p>
+          </div>
+        </article>
+      `
     )
     .join("");
 
@@ -200,6 +232,15 @@ function renderProjectLinks(project) {
     }));
 
   return renderActionButtons(actions);
+}
+
+function getHeroFeaturedProjects() {
+  const featuredSlugs = siteContent.hero.featuredProjectSlugs || [];
+  const featuredProjects = featuredSlugs
+    .map((slug) => siteContent.projects.find((project) => project.slug === slug))
+    .filter(Boolean);
+
+  return featuredProjects.length ? featuredProjects : siteContent.projects.slice(0, 3);
 }
 
 function renderActionButtons(actions = []) {

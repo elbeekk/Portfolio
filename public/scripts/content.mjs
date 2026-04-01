@@ -10,16 +10,19 @@ export const siteContent = {
   hero: {
     kicker: "Portfolio",
     name: "Elbek Mirzamakhmudov",
-    title: "Freelance Mobile Application Developer",
+    title: "Flutter & iOS Developer",
+    availability: "Available for select freelance and contract work",
     description:
-      "Mobile application developer with 2+ years of experience building and shipping native and cross-platform apps for iOS and Android, from client work to award-winning side projects.",
+      "I build polished mobile products in Flutter, SwiftUI, and UIKit, spanning client delivery platforms, public App Store launches, and award-winning side projects.",
     note:
-      "Based in Naples, Italy. Currently working freelance while continuing to deepen iOS craft through the Apple Developer Academy.",
+      "Freelancing from Naples while continuing to sharpen product thinking, SwiftUI craft, and iOS execution through the Apple Developer Academy.",
+    pills: ["Naples, Italy", "Flutter + iOS", "App Store delivery"],
+    featuredProjectSlugs: ["1charge", "mystore-sales", "campy"],
     facts: [
-      { label: "Current", value: "Freelance mobile developer" },
-      { label: "Recognition", value: "Swift Student Challenge Winner 2026 with Campy" },
-      { label: "Achievement", value: "SITE Hackathon winner in Trieste with PathMate" },
-      { label: "Focus", value: "Swift, Flutter, architecture, and production delivery" }
+      { label: "Current", value: "Freelance mobile developer working across client and product work." },
+      { label: "Recognition", value: "Swift Student Challenge Winner 2026 with Campy." },
+      { label: "Project", value: "Built PathMate during the SITE Hackathon in Trieste." },
+      { label: "Shipping", value: "Production apps, store submission, and release support end to end." }
     ],
     primaryCta: { label: "View Apps", href: "#projects" },
     secondaryCta: { label: "Contact", href: "#contact" }
@@ -147,8 +150,8 @@ export const siteContent = {
       tone: "olive",
       subtitle: "Accessible travel navigation",
       description:
-        "An AI-powered accessibility navigation app built to support equal travel experiences through adaptive wheelchair routes, high-safety routes for visually impaired users, focus modes for autistic users, AI camera accessibility scanning, and voice plus haptic guidance. PathMate won the SITE Hackathon in Trieste.",
-      tags: ["Accessibility", "AI", "Hackathon winner", "Travel"],
+        "An AI-powered accessibility navigation app built to support equal travel experiences through adaptive wheelchair routes, high-safety routes for visually impaired users, focus modes for autistic users, AI camera accessibility scanning, and voice plus haptic guidance. PathMate was developed during the SITE Hackathon in Trieste.",
+      tags: ["Accessibility", "AI", "Hackathon", "Travel"],
       links: {
         appStore: "https://apps.apple.com/us/app/pathmate/id6756574854?uo=4",
         developerPage: "https://apps.apple.com/my/developer/elbek-mirzamaxmudov/id1861371580"

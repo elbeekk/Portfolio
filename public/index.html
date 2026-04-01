@@ -27,7 +27,10 @@
     <main id="top" class="site-main">
       <section class="section hero reveal" id="hero">
         <div class="hero-copy">
-          <p class="section-kicker" data-hero-kicker></p>
+          <div class="hero-overline">
+            <p class="section-kicker" data-hero-kicker></p>
+            <span class="hero-status" data-hero-availability></span>
+          </div>
           <h1 class="hero-name" data-hero-name></h1>
           <p class="hero-title" data-hero-title></p>
           <p class="hero-description" data-hero-description></p>
@@ -42,17 +45,23 @@
               <span class="live-pill__dot" aria-hidden="true"></span>
               <span class="live-pill__text"><strong data-live-count>0</strong> exploring now</span>
             </div>
+            <div class="hero-pills" data-hero-pills></div>
           </div>
+
+          <div class="hero-fact-grid" data-hero-facts></div>
         </div>
 
         <aside class="hero-panel">
           <div class="hero-panel__card">
-            <p class="hero-panel__eyebrow">Approach</p>
-            <ul class="hero-facts" data-hero-facts></ul>
-          </div>
-          <div class="hero-panel__card hero-panel__card-muted">
             <p class="hero-panel__eyebrow">Current focus</p>
             <p class="hero-panel__note" data-hero-note></p>
+          </div>
+          <div class="hero-panel__card hero-panel__card-muted">
+            <div class="hero-panel__head">
+              <p class="hero-panel__eyebrow">Featured work</p>
+              <a class="hero-panel__inline-link" href="#projects">See all</a>
+            </div>
+            <div class="hero-featured" data-hero-featured></div>
           </div>
         </aside>
       </section>
@@ -106,7 +115,7 @@
 
     <footer class="site-footer">
       <p class="site-footer__copy" data-footer-copy></p>
-      <p class="site-footer__meta">Built as a static site with modular JavaScript and Firebase-backed presence.</p>
+      <p class="site-footer__meta">made with openai by heart</p>
     </footer>
 
     <div class="cursor-layer" data-cursor-layer aria-hidden="true"></div>
